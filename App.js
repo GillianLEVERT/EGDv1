@@ -1,6 +1,5 @@
-import React, { useState, useRef } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Image, PanResponder } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Image, Button } from "react-native";
 
 const images = [
   require("./assets/home2.png"),
@@ -8,50 +7,56 @@ const images = [
   require("./assets/favicon.png"),
 ];
 
-export default function App() {
+const App = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: (gestureState) => {
-        if (gestureState.dx > 50) {
-          setCurrentImageIndex((prevIndex) =>
-            prevIndex === images.length - 1 ? 0 : prevIndex + 1
-          );
-        } else if (gestureState.dx < -50) {
-          setCurrentImageIndex((prevIndex) =>
-            prevIndex === 0 ? images.length - 1 : prevIndex - 1
-          );
-        }
-      },
-    })
-  ).current;
+  const handleNextImage = () => {
+    if (currentImageIndex < images.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1);
+    }
+  };
+
+  const handlePreviousImage = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex(currentImageIndex - 1);
+    }
+  };
 
   return (
-    <View style={styles.container} {...panResponder.panHandlers}>
+    <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image source={images[currentImageIndex]} style={styles.image} />
       </View>
-      <StatusBar style="auto" />
+      <View style={styles.buttonContainer}>
+        <Button title="Previous" onPress={handlePreviousImage} disabled={currentImageIndex === 0} />
+        <Button title="Next" onPress={handleNextImage} disabled={currentImageIndex === images.length - 1} />
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#123",
-    alignItems: "center",
-  },
-  imageContainer: {
-    flex: 1,
-    paddingTop: 58,
-    backgroundColor: "#123",
+    flexDirection: "column",
   },
   image: {
     width: 320,
     height: 440,
     borderRadius: 18,
   },
+  imageContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 200,
+    marginBottom: 20,
+  },
 });
+
+export default App;
