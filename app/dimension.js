@@ -13,6 +13,7 @@ const DimensionScreen = () => {
     const w = parseFloat(width)
     const d = parseFloat(depth)
 
+    // Prévention de bug ?
     if (isNaN(h) || isNaN(w) || isNaN(d)) {
         alert ("veuillez entrer des dimensions valides.")
         return;
@@ -51,7 +52,7 @@ const DimensionScreen = () => {
         keyboardType="numeric"
       />
       <View style={styles.buttonContainer}>
-        <Button title="Calculer" onPress={calculatePrice} />
+        <Button title="Terminer et envoyer le devis" onPress={calculatePrice} />
       </View>
       {price !== null && (
         <Text style={styles.priceText}>Prix estimé: {price} €</Text>

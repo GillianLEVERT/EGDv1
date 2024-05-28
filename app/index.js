@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image, Button, Text } from "react-native";
-import { useRouter } from 'expo-router';
+import { StyleSheet, View, Image, Button } from "react-native";
+import { useRouter } from "expo-router";
 
 const images = [
   require("../assets/home2.png"),
-  require("../assets/background-image2.png"),
-  require("../assets/favicon.png"),
+  require("../assets/roof1.png"),
+  require("../assets/roof2.png"),
 ];
 
 const HomeScreen = () => {
@@ -26,14 +26,25 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
+      <View style={styles.imageStack}>
+        <Image
+          source={require("../assets/bg.png")}
+          style={styles.backgroundImage}
+        />
         <Image source={images[currentImageIndex]} style={styles.image} />
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Previous photos" onPress={handlePreviousImage} disabled={currentImageIndex === 0} />
-        <Button title="Next photos" onPress={handleNextImage} disabled={currentImageIndex === images.length - 1} />
-        <Button title="Dimensions" onPress={() => router.push('/dimension')} />
- 
+        <Button
+          title="Previous photos"
+          onPress={handlePreviousImage}
+          disabled={currentImageIndex === 0}
+        />
+        <Button
+          title="Next photos"
+          onPress={handleNextImage}
+          disabled={currentImageIndex === images.length - 1}
+        />
+        <Button title="Dimensions" onPress={() => router.push("/dimension")} />
       </View>
     </View>
   );
@@ -43,22 +54,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imageStack: {
+    width: 320,
+    height: 440,
+    position: "relative",
+  },
+  backgroundImage: {
+    ...StyleSheet.absoluteFillObject,
+    width: 320,
+    height: 440,
+    borderRadius: 18,
   },
   image: {
     width: 320,
     height: 440,
     borderRadius: 18,
-  },
-  imageContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    opacity: 0.5,
+    position: "absolute",
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: 300,
-    marginBottom: 20,
+    marginTop: 20,
   },
 });
 
