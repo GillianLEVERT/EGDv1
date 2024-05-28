@@ -30,10 +30,10 @@ const HomeScreen = () => {
         <Image source={images[currentImageIndex]} style={styles.image} />
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Previous" onPress={handlePreviousImage} disabled={currentImageIndex === 0} />
-        <Button title="Next" onPress={handleNextImage} disabled={currentImageIndex === images.length - 1} />
-        <Button title="vers dimension" onPress={() => router.push('/dimension')} />
-        <Button title="vers Login" onPress={() => router.push('/login')} />
+        <Button title="Previous photos" onPress={handlePreviousImage} disabled={currentImageIndex === 0} />
+        <Button title="Next photos" onPress={handleNextImage} disabled={currentImageIndex === images.length - 1} />
+        <Button title="Dimensions" onPress={() => router.push('/dimension')} />
+ 
       </View>
     </View>
   );
