@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image, Button } from "react-native";
 import { useRouter } from "expo-router";
 
+
 const images = [
   require("../assets/home2.png"),
   require("../assets/roof1.png"),
@@ -46,6 +47,9 @@ const HomeScreen = () => {
         />
         <Button title="Dimensions" onPress={() => router.push("/dimension")} />
       </View>
+     <View style={styles.buttonContainer}>
+        <Button title="Login" onPress={()=> router.push("/fetch")}/>
+      </View> 
     </View>
   );
 };
